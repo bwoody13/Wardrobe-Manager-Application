@@ -6,19 +6,21 @@ import model.clothingtypes.*;
 public class Outfit {
     //contains clothing items from distinct groups to make an outfit
     private String name;
-    private Hat hat;
-    private Shirt shirt;
-    private Sweater sweater;
-    private Jacket jacket;
-    private Sock socks;
-    private Shoe shoes;
+    private Clothing hat;
+    private Clothing shirt;
+    private Clothing sweater;
+    private Clothing jacket;
+    private Clothing bottoms;
+    private Clothing socks;
+    private Clothing shoes;
 
-    public Outfit(String name, Hat hat, Shirt shirt, Sweater sweater, Jacket jacket, Sock socks, Shoe shoes) {
+    public Outfit(String name, Clothing hat, Clothing shirt, Clothing sweater, Clothing jacket, Clothing bottoms, Clothing socks, Clothing shoes) {
         this.name = name;
         this.hat = hat;
         this.shirt = shirt;
         this.sweater = sweater;
         this.jacket = jacket;
+        this.bottoms = bottoms;
         this.socks = socks;
         this.shoes = shoes;
     }
@@ -51,31 +53,40 @@ public class Outfit {
         shoes = s;
     }
 
+    public void setBottoms(Bottoms bottoms) {
+        this.bottoms = bottoms;
+    }
+
     public String getName() {
         return name;
     }
 
-    public Hat getHat() {
+    public Clothing getHat() {
         return hat;
     }
 
-    public Jacket getJacket() {
+    public Clothing getJacket() {
         return jacket;
     }
 
-    public Shirt getShirt() {
+    public Clothing getShirt() {
         return shirt;
     }
 
-    public Shoe getShoes() {
+    public Clothing getShoes() {
         return shoes;
     }
 
-    public Sock getSocks() {
+    public Clothing getSocks() {
         return socks;
     }
 
-    public Sweater getSweater() {
+    public Clothing getSweater() {
         return sweater;
     }
+
+    public Clothing getBottoms() {
+        return bottoms;
+    }
 }
+

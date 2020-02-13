@@ -209,7 +209,7 @@ public class Wardrobe {
     public String filterFabricWardrobe(String fabric) {
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
-            if (c.fabric == fabric) {
+            if (c.fabric.equals(fabric)) {
                 filterList.add(c);
             }
         }

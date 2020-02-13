@@ -12,10 +12,18 @@ public class WardrobeManagerApp {
     private Wardrobe myWardrobe;
     private Scanner input;
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: Wardrobe application runs teh wardrobe app
+
     public WardrobeManagerApp() {
         runWardrobe();
     }
 
+
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: process user input
     //from TellerApp
     private void runWardrobe() {
         boolean keepGoing = true;
@@ -43,6 +51,9 @@ public class WardrobeManagerApp {
         myWardrobe = new Wardrobe();
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: process user command
     //from TellerApp
     private void processCommand(String command) {
         if (command.equals("current")) {
@@ -61,12 +72,18 @@ public class WardrobeManagerApp {
             doOutfit();
         } else if (command.equals("f")) {
             doFind();
+        } else if (command.equals("fo")) {
+            doFindOutfit();
         } else if (command.equals("filter")) {
             filterMenu();
         } else {
             System.out.println("Selection not valid...");
         }
     }
+
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: displays opening menu of user options
 
     private void openingMenu() {
         System.out.println("\nWelcome to your Wardrobe!");
@@ -78,10 +95,15 @@ public class WardrobeManagerApp {
         System.out.println("\tr -> remove a clothing item");
         System.out.println("\to -> add an outfit");
         System.out.println("\tf -> find an item");
+        System.out.println("\tfo -> find an outfit");
         System.out.println("\tfilter -> filter wardrobe on criteria");
         System.out.println("\tq -> quit");
     }
 
+
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: adds a clothing item to wardrobe unless already there
     private void doAddClothing() {
         Clothing added = selectType();
 
@@ -89,6 +111,9 @@ public class WardrobeManagerApp {
         clothingAttributes(added);
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: makes the actual clothing item
     private Clothing makeClothing(String slctn, String name, String size, String color, String brand, String fabric) {
         if (slctn.equals("bottoms")) {
             System.out.println("Length: ");
@@ -115,6 +140,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: allows user to enter fields for clothing item
     private Clothing enterFields(String selection) {
         String name;
         String size;
@@ -142,6 +170,9 @@ public class WardrobeManagerApp {
 
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: allows user to select waht type of clothing they want to add
     private Clothing selectType() {
         String selection = "";  // force entry into loop
 
@@ -166,6 +197,9 @@ public class WardrobeManagerApp {
         return enterFields(selection);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: asks user if they want to add this type of clothing to the outfit
     private Clothing shouldAdd(String item) {
         String selection = "";  // force entry into loop
         while (!(selection.equals("y") || selection.equals("n"))) {
@@ -185,6 +219,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: makes the new oufit and adds to wardrobe
     private void doOutfit() {
         Clothing hatO = shouldAdd("hat");
         Clothing shirtO = shouldAdd("shirt");
@@ -204,6 +241,9 @@ public class WardrobeManagerApp {
         System.out.println(outfit.outfitToString());
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: removes the clothing item form wardrobe if there, otherwise nothing
     private void doRemove() {
         System.out.println("Enter the name of the item you want to remove: ");
         String name = input.next();
@@ -215,6 +255,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: prints out the list of attributes for a clothing item
     private void clothingAttributes(Clothing item) {
         System.out.println("Attributes:");
         System.out.println("\t size: " + item.getSize());
@@ -224,6 +267,26 @@ public class WardrobeManagerApp {
         System.out.println("\t collaboration: " + item.getCollaboration());
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: finds an outfit in the wardrobe
+    private void doFindOutfit() {
+        System.out.println("Enter the name of the outfit you want to find: ");
+        String name;
+        name = input.next();
+        name = name.toLowerCase();
+        if (null != myWardrobe.findOutfit(name)) {
+            Outfit found = myWardrobe.findOutfit(name);
+            System.out.println("There was an outfit named " + name + " in your wardrobe.");
+            System.out.println(found.outfitToString());
+        } else {
+            System.out.println("outfit of name " + name + " was not found.");
+        }
+    }
+
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: finds a clothing item in the wardrobe
     private void doFind() {
         System.out.println("Enter the name of the item you want to find: ");
         String name;
@@ -238,6 +301,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: provides a menu of attributes to edit
     private void editMenu(Clothing item) {
         String selection = "";
 
@@ -256,6 +322,9 @@ public class WardrobeManagerApp {
         completeEdit(selection, item);
     }
 
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: completes the edit of a clothing item
     private void completeEdit(String selection, Clothing item) {
         System.out.println("What do you want to change the " + selection + " to?");
         String newAtt;
@@ -281,6 +350,9 @@ public class WardrobeManagerApp {
         System.out.println(selection + " was changed to " + newAtt);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: finds item the user wants to edit
     private void doEdit() {
         System.out.println("Enter the name of the item you want to edit:");
         String name = input.next();
@@ -293,6 +365,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: select the type of filtering the user wants
     private void doFilter(String selection) {
         if (selection.equals("brand")) {
             String brand;
@@ -317,6 +392,9 @@ public class WardrobeManagerApp {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: presents the menu for the user to select filter type
     private void filterMenu() {
         String selection = "";  // force entry into loop
 
@@ -336,6 +414,9 @@ public class WardrobeManagerApp {
 
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: prints the current wardrobe
     private void printCurrentWardrobe() {
         String currentWardrobe;
         currentWardrobe = myWardrobe.currentToString();
@@ -343,12 +424,18 @@ public class WardrobeManagerApp {
 
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: prints the old wardrobe
     private void printOldWardrobe() {
         String oldWardrobe;
         oldWardrobe = myWardrobe.oldToString();
         System.out.println(oldWardrobe);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS: prints the outfits in teh wardrobe
     private void printOutfits() {
         String outfits;
         outfits = myWardrobe.outfitsToString();

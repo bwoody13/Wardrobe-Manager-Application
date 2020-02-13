@@ -18,7 +18,6 @@ public abstract class Clothing {
     protected String fabric;
     protected boolean isCollaboration;
     protected String collaboration;
-    protected int quantity;
     protected int value;
     protected String type;
 
@@ -30,8 +29,7 @@ public abstract class Clothing {
         this.brand = brand;
         this.fabric = fabric;
         isCollaboration = false;
-        collaboration = null;
-        quantity = 1;
+        collaboration = "";
         value = 0;
     }
 
@@ -46,10 +44,6 @@ public abstract class Clothing {
 
     public String getColour() {
         return colour;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public int getValue() {
@@ -76,6 +70,33 @@ public abstract class Clothing {
         return size;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public void setFabric(String fabric) {
+        this.fabric = fabric;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
 
 

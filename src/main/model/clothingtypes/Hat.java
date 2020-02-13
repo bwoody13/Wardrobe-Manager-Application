@@ -12,7 +12,7 @@ public class Hat extends Clothing {
     public Hat(String name, String size, String color, String brand, String fabric) {
         super(name, size, color, brand, fabric);
         isFitted = false;
-        type = "Hat";
+        type = "hat";
     }
 
     public void setFitted(boolean fitted) {

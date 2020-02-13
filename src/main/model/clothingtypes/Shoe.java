@@ -13,6 +13,6 @@ public class Shoe extends Clothing {
     public Shoe(String name, String size, String color, String brand, String fabric, String model) {
         super(name, size, color, brand, fabric);
         this.model = model;
-        type = "Shoe";
+        type = "shoe";
     }
 }

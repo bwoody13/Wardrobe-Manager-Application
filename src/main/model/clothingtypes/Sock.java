@@ -12,7 +12,7 @@ public class Sock extends Clothing {
     public Sock(String name, String size, String color, String brand, String fabric, String height) {
         super(name, size, color, brand, fabric);
         this.height = height;
-        type = "Sock";
+        type = "sock";
     }
 
 }

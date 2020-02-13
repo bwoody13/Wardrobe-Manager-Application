@@ -12,7 +12,7 @@ public class Jacket extends Clothing {
     public Jacket(String name, String size, String color, String brand, String fabric) {
         super(name, size, color, brand, fabric);
         hasZipper = false;
-        type = "Jacket";
+        type = "jacket";
     }
 
     public void setHasZipper(boolean hasZipper) {

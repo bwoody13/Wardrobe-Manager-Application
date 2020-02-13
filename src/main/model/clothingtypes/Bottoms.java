@@ -9,6 +9,11 @@ public class Bottoms extends Clothing {
     public Bottoms(String name, String size, String color, String brand, String fabric, String length) {
         super(name, size, color, brand, fabric);
         this.length = length;
-        type = "Bottoms";
+        type = "bottoms";
+    }
+
+    public String getLength() {
+        return length;
     }
 }
+

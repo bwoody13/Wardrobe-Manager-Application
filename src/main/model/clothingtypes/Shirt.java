@@ -11,7 +11,7 @@ public class Shirt extends Clothing {
         super(name, size, color, brand, fabric);
         this.sleeveLength = sleeveLength;
         isButtoned = false;
-        type = "Shirt";
+        type = "shirt";
     }
 
 

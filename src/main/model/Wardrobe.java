@@ -308,7 +308,7 @@ public class Wardrobe {
     public String outfitsToString() {
         String output = "";
         for (Outfit o : outfits) {
-            output = output + "\n" + o.getName();
+            output += o.outfitToString();
         }
         return output;
     }
@@ -316,3 +316,24 @@ public class Wardrobe {
 }
 
 
+//if (o.getHat() != null) {
+//        output += "hat: " + o.getHat().getName() + ", ";
+//        }
+//        if (o.getShirt() != null) {
+//        output += "shirt: " + o.getShirt().getName() + ", ";
+//        }
+//        if (o.getSweater() != null) {
+//        output += "sweater: " + o.getSweater().getName() + ", ";
+//        }
+//        if (o.getJacket() != null) {
+//        output += "jacket: " + o.getJacket().getName() + ", ";
+//        }
+//        if (o.getBottoms() != null) {
+//        output += "bottoms: " + o.getBottoms().getName() + ", ";
+//        }
+//        if (o.getSocks() != null) {
+//        output += "sock: " + o.getSocks().getName() + ", ";
+//        }
+//        if (o.getShoes() != null) {
+//        output += "shoe: " + o.getShoes().getName();
+//        }

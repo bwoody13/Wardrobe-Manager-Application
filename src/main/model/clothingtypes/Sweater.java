@@ -14,7 +14,7 @@ public class Sweater extends Clothing {
         super(name, size, color, brand, fabric);
         hasZipper = false;
         hasHood = false;
-        type = "Sweater";
+        type = "sweater";
     }
 
     public void setHasHood(boolean b) {

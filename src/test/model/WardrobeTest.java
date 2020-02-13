@@ -101,7 +101,7 @@ class WardrobeTest {
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
         testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
-        assertEquals("\nShirt named Bape Busy Works made by Bape", testWardrobe.filterBrandWardrobe("Bape"));
+        assertEquals("\nshirt named Bape Busy Works made by Bape", testWardrobe.filterBrandWardrobe("Bape"));
     }
 
     @Test
@@ -111,9 +111,9 @@ class WardrobeTest {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
         testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        assertEquals("\nShirt named Bape Busy Works made by Bape\n" +
-                "Shoe named Defiant made by Air Jordan\n" +
-                "Sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("White"));
+        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                "shoe named Defiant made by Air Jordan\n" +
+                "sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("White"));
     }
 
     @Test
@@ -124,21 +124,21 @@ class WardrobeTest {
         testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
         testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
         testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "Cotton", "Short");
-        assertEquals("\nShirt named Bape Busy Works made by Bape\n" +
-                "Shirt named Supreme Octopus made by Bape", testWardrobe.filterTypeWardrobe("Shirt"));
+        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                "shirt named Supreme Octopus made by Bape", testWardrobe.filterTypeWardrobe("shirt"));
     }
 
     @Test
     public void testFilterFabric() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "cotton", "Tall");
         testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "Cotton", "Short");
-        assertEquals("\nShirt named Bape Busy Works made by Bape\n" +
-                "Sock named Stormtrooper made by Stance\n" +
-                "Shirt named Supreme Octopus made by Bape", testWardrobe.filterFabricWardrobe("Cotton"));
+        testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "cotton", "Short");
+        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                "sock named Stormtrooper made by Stance\n" +
+                "shirt named Supreme Octopus made by Bape", testWardrobe.filterFabricWardrobe("cotton"));
     }
 
     @Test
@@ -162,9 +162,9 @@ class WardrobeTest {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        assertEquals("\nHat named OVO Basic Owl made by OVO\n" +
-                "Shirt named Bape Busy Works made by Bape\n" +
-                "Shoe named Defiant made by Air Jordan", testWardrobe.currentToString());
+        assertEquals("\nhat named OVO Basic Owl made by OVO\n" +
+                "shirt named Bape Busy Works made by Bape\n" +
+                "shoe named Defiant made by Air Jordan", testWardrobe.currentToString());
     }
 
     @Test
@@ -175,16 +175,17 @@ class WardrobeTest {
         testWardrobe.removeClothing("OVO Basic Owl");
         testWardrobe.removeClothing("Bape Busy Works");
         testWardrobe.removeClothing("Defiant");
-        assertEquals("\nHat named OVO Basic Owl made by OVO\n" +
-                "Shirt named Bape Busy Works made by Bape\n" +
-                "Shoe named Defiant made by Air Jordan", testWardrobe.oldToString());
+        assertEquals("\nhat named OVO Basic Owl made by OVO\n" +
+                "shirt named Bape Busy Works made by Bape\n" +
+                "shoe named Defiant made by Air Jordan", testWardrobe.oldToString());
     }
 
     @Test
     public void testOutfitsToString() {
         testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
         testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
-        assertEquals("\nTester\nTest Outfit", testWardrobe.outfitsToString());
+        assertEquals("\nTester(hat: OVO Basic Owl shirt: Bape Busy Works sweater: Kappa X Charms Flames  bottoms: Distressed Jeans sock: Stormtrooper shoe: Defiant)\n" +
+                "Test Outfit( shirt: Supreme Octopus  jacket: Bomber bottoms: Distressed Jeans sock: Mortal Kombat shoe: Toro Bravo)", testWardrobe.outfitsToString());
     }
 
 }

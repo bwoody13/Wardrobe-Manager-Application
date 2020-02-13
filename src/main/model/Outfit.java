@@ -32,34 +32,6 @@ public class Outfit {
         this.name = name;
     }
 
-    public void setHat(Hat h) {
-        hat = h;
-    }
-
-    public void setShirt(Shirt s) {
-        shirt = s;
-    }
-
-    public void setSweater(Sweater s) {
-        sweater = s;
-    }
-
-    public void setJacket(Jacket j) {
-        jacket = j;
-    }
-
-    public void setSocks(Sock s) {
-        socks = s;
-    }
-
-    public void setShoes(Shoe s) {
-        shoes = s;
-    }
-
-    public void setBottoms(Bottoms bottoms) {
-        this.bottoms = bottoms;
-    }
-
     public String getName() {
         return name;
     }

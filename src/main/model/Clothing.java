@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.*;
+
 
 //represents a typical clothing item that will be used to extend other clothing items
 public abstract class Clothing {
@@ -18,7 +18,6 @@ public abstract class Clothing {
     protected String fabric;
     protected boolean isCollaboration;
     protected String collaboration;
-    protected int value;
     protected String type;
 
 
@@ -30,7 +29,6 @@ public abstract class Clothing {
         this.fabric = fabric;
         isCollaboration = false;
         collaboration = "";
-        value = 0;
     }
 
     public void setCollaboration(String brand) {
@@ -38,16 +36,9 @@ public abstract class Clothing {
         collaboration = brand;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     public String getColour() {
         return colour;
-    }
-
-    public int getValue() {
-        return value;
     }
 
     public String getBrand() {

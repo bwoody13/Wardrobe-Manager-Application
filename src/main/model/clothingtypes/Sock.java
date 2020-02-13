@@ -2,7 +2,6 @@ package model.clothingtypes;
 
 import model.Clothing;
 
-import java.awt.*;
 
 //represents a clothing of type sock
 public class Sock extends Clothing {
@@ -15,4 +14,7 @@ public class Sock extends Clothing {
         type = "sock";
     }
 
+    public String getHeight() {
+        return height;
+    }
 }

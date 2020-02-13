@@ -2,11 +2,10 @@ package model.clothingtypes;
 
 import model.Clothing;
 
-import java.awt.*;
+
 
 //represents a clothing of type shoe
 public class Shoe extends Clothing {
-
     private String model;
 
 
@@ -14,5 +13,9 @@ public class Shoe extends Clothing {
         super(name, size, color, brand, fabric);
         this.model = model;
         type = "shoe";
+    }
+
+    public String getModel() {
+        return model;
     }
 }

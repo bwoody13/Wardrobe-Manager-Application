@@ -2,8 +2,6 @@ package model.clothingtypes;
 
 import model.Clothing;
 
-import java.awt.*;
-
 //represents a clothing of type jacket
 public class Jacket extends Clothing {
 

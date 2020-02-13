@@ -26,4 +26,3 @@ entire collection, make outfits, and see what clothing pieces I have that are si
 - add a piece of clothing to an outfit.
 - filter and sort my wardrobe to find specific items that meet my criteria.
 - update information on an item in my wardrobe or add a detail about it.
-- see the value of my wardrobe and items within it.

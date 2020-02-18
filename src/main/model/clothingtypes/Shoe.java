@@ -3,7 +3,6 @@ package model.clothingtypes;
 import model.Clothing;
 
 
-
 //represents a clothing of type shoe
 public class Shoe extends Clothing {
     private String model;

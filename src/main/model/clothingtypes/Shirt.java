@@ -2,6 +2,7 @@ package model.clothingtypes;
 
 import model.Clothing;
 
+//represents clothing of type shirt
 public class Shirt extends Clothing {
 
     private String sleeveLength;

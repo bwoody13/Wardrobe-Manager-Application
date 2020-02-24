@@ -3,12 +3,17 @@ package ui;
 import model.Clothing;
 import model.Outfit;
 import model.Wardrobe;
+import persistence.Reader;
+import persistence.Writer;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class WardrobeManagerApp {
-
+    private static final String WARDROBE_FILE = "./data/wardrobe.txt";
     private Wardrobe myWardrobe;
     private Scanner input;
 
@@ -51,6 +56,30 @@ public class WardrobeManagerApp {
         myWardrobe = new Wardrobe();
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads wardrobe from WARDROBE_FILE, if that file exists;
+    // otherwise initializes wardrobe with default values
+    private void loadWardrobe() {
+        try {
+            myWardrobe = Reader.readWardrobe(new FileInputStream(WARDROBE_FILE));
+        } catch (IOException | ClassNotFoundException e) {
+            init();
+        }
+    }
+
+    //EFFECTS: saves state of the wardrobe to the WARDROBE_FILE
+    private void saveWardrobe() {
+        Writer writer;
+        try {
+            writer = new Writer(new FileOutputStream(WARDROBE_FILE));
+            writer.write(myWardrobe);
+            writer.close();
+            System.out.println("Wardrobe saved to file " + WARDROBE_FILE);
+        } catch (IOException e) {
+            System.out.println("Unable to save wardrobe to " + WARDROBE_FILE);
+        }
+    }
+
     //REQUIRES:
     //MODIFIES: this
     //EFFECTS: process user command
@@ -74,8 +103,23 @@ public class WardrobeManagerApp {
             doFind();
         } else if (command.equals("fo")) {
             doFindOutfit();
+        } else {
+            processCommandContinued(command);
+        }
+    }
+
+    //REQUIRES:
+    //MODIFIES: this
+    //EFFECTS: process user command contd.
+    private void processCommandContinued(String command) {
+        if (command.equals("fo")) {
+            doFindOutfit();
         } else if (command.equals("filter")) {
             filterMenu();
+        } else if (command.equals("save")) {
+            saveWardrobe();
+        } else if (command.equals("load")) {
+            loadWardrobe();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -97,6 +141,8 @@ public class WardrobeManagerApp {
         System.out.println("\tf -> find an item");
         System.out.println("\tfo -> find an outfit");
         System.out.println("\tfilter -> filter wardrobe on criteria");
+        System.out.println("\tsave -> save wardrobe to file");
+        System.out.println("\tload -> load wardrobe form file");
         System.out.println("\tq -> quit");
     }
 

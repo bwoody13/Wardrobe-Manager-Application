@@ -1,9 +1,10 @@
 package model;
 
-import model.clothingtypes.*;
+
+import java.io.Serializable;
 
 //represents an outfit containing different pieces of clothing per outfit
-public class Outfit {
+public class Outfit implements Serializable {
     //contains clothing items from distinct groups to make an outfit
     private String name;
     private Clothing hat;

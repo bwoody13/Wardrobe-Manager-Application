@@ -1,12 +1,15 @@
 package model;
 
 import model.clothingtypes.*;
+import persistence.Writer;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 // holds all individual clothing items owned, sold/thrown out, and outfits made
-public class Wardrobe {
+public class Wardrobe implements Serializable {
 
 
     private ArrayList<Clothing> currentWardrobe; //clothes currently owned
@@ -164,7 +167,7 @@ public class Wardrobe {
         }
         String output = "";
         for (Clothing c : filterList) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -181,7 +184,7 @@ public class Wardrobe {
         }
         String output = "";
         for (Clothing c : filterList) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -198,7 +201,7 @@ public class Wardrobe {
         }
         String output = "";
         for (Clothing c : filterList) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -215,7 +218,7 @@ public class Wardrobe {
         }
         String output = "";
         for (Clothing c : filterList) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -286,7 +289,7 @@ public class Wardrobe {
     public String currentToString() {
         String output = "";
         for (Clothing c : currentWardrobe) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -297,7 +300,7 @@ public class Wardrobe {
     public String oldToString() {
         String output = "";
         for (Clothing c : oldWardrobe) {
-            output = output + "\n" + c.type + " named " + c.name + " made by " + c.brand;
+            output += "\n" + c.type + " named " + c.name + " made by " + c.brand;
         }
         return output;
     }
@@ -311,6 +314,10 @@ public class Wardrobe {
             output += o.outfitToString();
         }
         return output;
+    }
+
+    public void serialize(Writer writer) throws IOException {
+        writer.write(this);
     }
 
 }

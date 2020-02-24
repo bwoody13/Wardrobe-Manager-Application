@@ -1,9 +1,10 @@
 package model;
 
 
+import java.io.Serializable;
 
 //represents a typical clothing item that will be used to extend other clothing items
-public abstract class Clothing {
+public abstract class Clothing implements Serializable {
 
     public static final String SMALL = "S";
     public static final String MEDIUM = "M";

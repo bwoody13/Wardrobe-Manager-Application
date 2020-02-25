@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WriterTest {
+public class WriterReaderTest {
 
     private static final String TEST_FILE = "./data/testWardrobes.txt";
     private Writer testWriter;
@@ -42,11 +42,11 @@ public class WriterTest {
     }
 
     @Test
-    void testWriteWardrobe() throws IOException {
-        testWriter.write(testWardrobe);
-        testWriter.close();
-
+    void testWriteWardrobe() {
         try {
+            testWriter.write(testWardrobe);
+            testWriter.close();
+
             Wardrobe readWardrobe = Reader.readWardrobe(new FileInputStream(TEST_FILE));
             assertEquals(4, readWardrobe.currentSize());
             assertNotEquals(null, readWardrobe.findCurrentItem("defiant"));

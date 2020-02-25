@@ -62,8 +62,9 @@ public class WardrobeManagerApp {
     private void loadWardrobe() {
         try {
             myWardrobe = Reader.readWardrobe(new FileInputStream(WARDROBE_FILE));
+            System.out.println("Successfully loaded a wardrobe from " + WARDROBE_FILE);
         } catch (IOException | ClassNotFoundException e) {
-            init();
+            System.out.println("Unable to load a wardrobe from " + WARDROBE_FILE);
         }
     }
 

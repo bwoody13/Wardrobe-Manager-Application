@@ -21,10 +21,38 @@ entire collection, make outfits, and see what clothing pieces I have that are si
 #User Stories:
 ***As a user, I want to be able to:***
 - add a new piece of clothing to my wardrobe.
-- associate an item of clothing to a brand(ie. Nike), type (ie. T-Shirt), and other important attributes associated with 
+- associate an item of clothing to a brand(ie. Nike), type (ie. Shirt), and other important attributes associated with 
   that type (ie. fabric, collaboration, size, colour, etc.).
 - add a piece of clothing to an outfit.
-- filter and sort my wardrobe to find specific items that meet my criteria.
+- remove a clothing item from my current wardrobe and store it in a wardrobe for items I've gotten rid of.
+- find a clothing item or outfit by name.
+- view all clothing items, all discarded clothing items, and outfits.
+- filter my wardrobe to find specific items that meet my criteria.
 - update information on an item in my wardrobe or add a detail about it.
 - quit the application and have it save my wardrobe to a file.
 - reload my application from a save file upon opening the application.
+
+#Instructions for Grader:
+Run WardrobeManagerProgram to open the Application
+- You can generate the first required event by opening the Clothing Menu, then selecting "Add Clothing", then any type 
+  of clothing you wish. From there you will enter the fields for that clothing item. after that is done the clothing 
+  item will be added onto the wardrobe and displayed in its own pane, with audio playing signifying it was added. 
+  You can also now see it in the list of clothing items in the main screen.
+- You can generate the second required event by navigating to the "Add Outfit" button in the Outfit menu. Here you will 
+  decide which clothing items (that are already in your wardrobe) you want to add to an outfit. From here you will also 
+  be presented with the outfit in its own pane and audio notifying you it was added will play. To view you outfits, 
+  simply select the "Display Outfits" button in the Wardrobe Menu.
+- You can locate my visual and audio component by completing one of the tasks above (Add a clothing item or add a 
+  outfit). Once created the pane will have a photo and audio saying what has been added to the wardrobe.
+- You can save the state of my application by navigating to the File Menu and pressing the "Save" button, or to use the
+  auto save, you can close the application and it will save for you.
+- You can reload the state of my application by navigating to the File Menu and pressing the "Load" button. However,
+  this is unnecessary as the application will load from the previous state when the application is opened.
+  
+##*Additional Things to Do*
+   If you want to continue exploring this application you can test out the functionality of each different button in the
+   menu. They are pretty explicit in terms of operation. Eg. the "Edit Clothing" button will look up a clothing item 
+   then allow you to edit an attribute of your choosing. You may also wish to filter the wardrobe to only display
+   certain clothing items. To do this, navigate to the Filter By Submenu under the Wardrobe Menu, then select the style
+   in which you wish to filter. Enjoy using thi application! :) 
+

@@ -268,7 +268,7 @@ public class WardrobeManagerApp {
 
     //REQUIRES:
     //MODIFIES: this
-    //EFFECTS: makes the new oufit and adds to wardrobe
+    //EFFECTS: makes the new outfit and adds to wardrobe
     private void doOutfit() {
         Clothing hatO = shouldAdd("hat");
         Clothing shirtO = shouldAdd("shirt");

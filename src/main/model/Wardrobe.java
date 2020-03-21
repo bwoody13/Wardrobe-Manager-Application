@@ -6,6 +6,7 @@ import persistence.Writer;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 // holds all individual clothing items owned, sold/thrown out, and outfits made
@@ -161,7 +162,7 @@ public class Wardrobe implements Serializable {
     public String filterBrandWardrobe(String brand) {
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
-            if (c.brand.equals(brand)) {
+            if (c.brand.toLowerCase().equals(brand)) {
                 filterList.add(c);
             }
         }
@@ -178,7 +179,7 @@ public class Wardrobe implements Serializable {
     public String filterColorWardrobe(String color) {
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
-            if (c.colour.equals(color)) {
+            if (c.colour.toLowerCase().equals(color)) {
                 filterList.add(c);
             }
         }
@@ -195,7 +196,7 @@ public class Wardrobe implements Serializable {
     public String filterTypeWardrobe(String type) {
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
-            if (c.type.equals(type)) {
+            if (c.type.toLowerCase().equals(type)) {
                 filterList.add(c);
             }
         }
@@ -212,7 +213,7 @@ public class Wardrobe implements Serializable {
     public String filterFabricWardrobe(String fabric) {
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
-            if (c.fabric.equals(fabric)) {
+            if (c.fabric.toLowerCase().equals(fabric)) {
                 filterList.add(c);
             }
         }
@@ -250,7 +251,8 @@ public class Wardrobe implements Serializable {
     public Clothing findCurrentItem(String name) {
         Clothing found = null;
         for (Clothing c : currentWardrobe) {
-            if (c.name.equals(name)) {
+            String lowerName = c.name.toLowerCase();
+            if (lowerName.equals(name)) {
                 found = c;
             }
         }
@@ -318,6 +320,18 @@ public class Wardrobe implements Serializable {
 
     public void serialize(Writer writer) throws IOException {
         writer.write(this);
+    }
+
+    public List<Clothing> getCurrentWardrobe() {
+        return currentWardrobe;
+    }
+
+    public List<Clothing> getOldWardrobe() {
+        return oldWardrobe;
+    }
+
+    public List<Outfit> getOutfits() {
+        return outfits;
     }
 
 }

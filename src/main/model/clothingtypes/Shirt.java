@@ -18,4 +18,7 @@ public class Shirt extends Clothing {
         this.sleeveLength = sleeveLength;
     }
 
+    public String getSleeveLength() {
+        return sleeveLength;
+    }
 }

@@ -17,4 +17,8 @@ public class Shoe extends Clothing {
     public String getModel() {
         return model;
     }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 }

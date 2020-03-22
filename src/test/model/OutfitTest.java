@@ -30,6 +30,12 @@ public class OutfitTest {
     }
 
     @Test
+    void testSetName() {
+        testOutfit.setName("different");
+        assertEquals("different",testOutfit.getName());
+    }
+
+    @Test
     public void testOutfitToString() {
         assertEquals("\ntest outfit(hat: OVO Basic Owl shirt: Bape Busy Works sweater: Kappa X Charms Flames jacket: " +
                 "Bomber bottoms: Distressed Jeans sock: Mortal Kombat shoe: Toro Bravo)", testOutfit.outfitToString());

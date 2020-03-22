@@ -711,7 +711,7 @@ public class WardrobeManagerProgram extends JFrame {
             Clothing item = myWardrobe.findCurrentItem(name);
             editMenu(item);
         } else {
-            System.out.println("item of name " + name + " was not found.");
+            errorMessage("item of name " + name + " was not found.");
         }
     }
 
@@ -739,7 +739,7 @@ public class WardrobeManagerProgram extends JFrame {
         } else {
             item.setCollaboration(newAtt);
         }
-        System.out.println(whatToEdit + " was changed to " + newAtt);
+        informationMessage(whatToEdit + " was changed to " + newAtt, "Item Edited");
         updateClothingList();
     }
 

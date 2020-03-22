@@ -1,9 +1,6 @@
 package model;
 
 import model.clothingtypes.*;
-import persistence.Writer;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +157,7 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: returns clothes meeting brand criteria
     public String filterBrandWardrobe(String brand) {
+        brand = brand.toLowerCase();
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
             if (c.brand.toLowerCase().equals(brand)) {
@@ -177,6 +175,7 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: returns clothes meeting colour criteria
     public String filterColorWardrobe(String color) {
+        color = color.toLowerCase();
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
             if (c.colour.toLowerCase().equals(color)) {
@@ -194,6 +193,7 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: returns clothes meeting clothing type criteria
     public String filterTypeWardrobe(String type) {
+        type = type.toLowerCase();
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
             if (c.type.toLowerCase().equals(type)) {
@@ -211,6 +211,7 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: returns clothes meeting fabric criteria
     public String filterFabricWardrobe(String fabric) {
+        fabric = fabric.toLowerCase();
         ArrayList<Clothing> filterList = new ArrayList<>();
         for (Clothing c : currentWardrobe) {
             if (c.fabric.toLowerCase().equals(fabric)) {
@@ -249,6 +250,7 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: produces the clothing item with given name in current wardrobe, or if not found, null
     public Clothing findCurrentItem(String name) {
+        name = name.toLowerCase();
         Clothing found = null;
         for (Clothing c : currentWardrobe) {
             String lowerName = c.name.toLowerCase();
@@ -263,9 +265,10 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: produces the clothing item in old wardrobe with given name, or if not found, null
     public Clothing findOldItem(String name) {
+        name = name.toLowerCase();
         Clothing found = null;
         for (Clothing c : oldWardrobe) {
-            if (c.name.equals(name)) {
+            if (c.name.toLowerCase().equals(name)) {
                 found = c;
             }
         }
@@ -276,9 +279,10 @@ public class Wardrobe implements Serializable {
     //MODIFIES:
     //EFFECTS: produces the outfit with given name, or if not found, null
     public Outfit findOutfit(String name) {
+        name = name.toLowerCase();
         Outfit found = null;
         for (Outfit o : outfits) {
-            if (o.getName().equals(name)) {
+            if (o.getName().toLowerCase().equals(name)) {
                 found = o;
             }
         }
@@ -316,10 +320,6 @@ public class Wardrobe implements Serializable {
             output += o.outfitToString();
         }
         return output;
-    }
-
-    public void serialize(Writer writer) throws IOException {
-        writer.write(this);
     }
 
     public List<Clothing> getCurrentWardrobe() {

@@ -44,10 +44,21 @@ class WardrobeTest {
 
     @Test
     public void testAddMultipleItems() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
-        testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
-        assertEquals(3, testWardrobe.currentSize());
+        Clothing c = testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+        Clothing c2 = testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
+        Clothing c3 = testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
+        Clothing c4 = testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        Clothing c5 = testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+        Clothing c6 = testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+        Clothing c7 = testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+        assertEquals(7, testWardrobe.currentSize());
+        assertEquals("Bape Busy Works",c.getName());
+        assertEquals("Kappa X Charms Flames",c2.getName());
+        assertEquals("Toro Bravo",c3.getName());
+        assertEquals("OVO Basic Owl",c4.getName());
+        assertEquals("Stormtrooper",c5.getName());
+        assertEquals("Bomber",c6.getName());
+        assertEquals("Distressed Jeans",c7.getName());
     }
 
     @Test
@@ -60,7 +71,7 @@ class WardrobeTest {
     @Test
     public void testRemoveThere() {
         testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
-        testWardrobe.removeClothing("Mortal Kombat");
+        testWardrobe.removeClothing("mortal kombat");
         assertEquals(1, testWardrobe.oldSize());
 
     }
@@ -69,8 +80,8 @@ class WardrobeTest {
     public void testRemoveMultipleThere() {
         testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
         testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
-        testWardrobe.removeClothing("Stormtrooper");
-        testWardrobe.removeClothing("Distressed Jeans");
+        testWardrobe.removeClothing("stormtrooper");
+        testWardrobe.removeClothing("distressed jeans");
         assertEquals(2, testWardrobe.oldSize());
 
     }
@@ -97,9 +108,10 @@ class WardrobeTest {
     @Test
     public void testFilterBrand() {
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
+        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
         testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
-        assertEquals("\nshirt named Bape Busy Works made by Bape", testWardrobe.filterBrandWardrobe("Bape"));
+        assertEquals("\nshirt named Bape Busy Works made by Bape" +
+                "\nsweater named Kappa X Charms Flames made by Bape", testWardrobe.filterBrandWardrobe("bape"));
     }
 
     @Test
@@ -111,7 +123,7 @@ class WardrobeTest {
         testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
         assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
                 "shoe named Defiant made by Air Jordan\n" +
-                "sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("White"));
+                "sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("white"));
     }
 
     @Test
@@ -144,7 +156,7 @@ class WardrobeTest {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        assertEquals("Bape Busy Works", testWardrobe.findCurrentItem("Bape Busy Works").name);
+        assertEquals("Bape Busy Works", testWardrobe.findCurrentItem("bape busy works").name);
     }
 
     @Test
@@ -184,6 +196,17 @@ class WardrobeTest {
         testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
         assertEquals("\nTester(hat: OVO Basic Owl shirt: Bape Busy Works sweater: Kappa X Charms Flames  bottoms: Distressed Jeans sock: Stormtrooper shoe: Defiant)\n" +
                 "Test Outfit( shirt: Supreme Octopus  jacket: Bomber bottoms: Distressed Jeans sock: Mortal Kombat shoe: Toro Bravo)", testWardrobe.outfitsToString());
+    }
+
+    @Test
+    void testGetLists() {
+        testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+        assertTrue(testWardrobe.getOutfits().contains(testWardrobe.findOutfit("tester")));
+        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+        assertTrue(testWardrobe.getCurrentWardrobe().contains(testWardrobe.findCurrentItem("ovo basic owl")));
+        testWardrobe.removeClothing("Bape Busy Works");
+        assertTrue(testWardrobe.getOldWardrobe().contains(testWardrobe.findOldItem("bape busy works")));
     }
 
 }

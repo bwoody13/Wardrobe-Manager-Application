@@ -53,6 +53,7 @@ public class WardrobeManagerProgram extends JFrame {
     private JList<String> clothingStringList;
     private List<Clothing> clothingList;
     private JList<String> outfitStringList;
+    private JScrollPane listScroller;
     private List<Outfit> outfits;
     private JPanel buttonPane;
     private JButton openButton;
@@ -103,7 +104,7 @@ public class WardrobeManagerProgram extends JFrame {
             listModel.addElement(c.getType().toUpperCase() + " - Name: " + c.getName() + ", Made by: " + c.getBrand());
             clothingList.add(c);
         }
-        JScrollPane listScroller = new JScrollPane();
+        listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
@@ -423,9 +424,13 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
+        listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(clothingStringList);
+        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
+        listScroller.setViewportView(clothingStringList);
+        clothingStringList.setLayoutOrientation(JList.VERTICAL);
+        add(listScroller);
         addButtonClothing();
         setVisible(true);
     }
@@ -446,9 +451,13 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
+        listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(clothingStringList);
+        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
+        listScroller.setViewportView(clothingStringList);
+        clothingStringList.setLayoutOrientation(JList.VERTICAL);
+        add(listScroller);
         addButtonClothing();
         setVisible(true);
     }
@@ -469,9 +478,13 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
+        listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(clothingStringList);
+        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
+        listScroller.setViewportView(clothingStringList);
+        clothingStringList.setLayoutOrientation(JList.VERTICAL);
+        add(listScroller);
         addButtonClothing();
         setVisible(true);
     }
@@ -492,9 +505,13 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
+        listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        add(clothingStringList);
+        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
+        listScroller.setViewportView(clothingStringList);
+        clothingStringList.setLayoutOrientation(JList.VERTICAL);
+        add(listScroller);
         addButtonClothing();
         setVisible(true);
     }
@@ -502,11 +519,9 @@ public class WardrobeManagerProgram extends JFrame {
     //MODIFIES: this
     //EFFECTS: removes the correct list of either clothing or outfit
     private void whatToRemove() {
+        remove(listScroller);
         if (isOutfitsDisplayed) {
-            remove(outfitStringList);
             isOutfitsDisplayed = false;
-        } else {
-            remove(clothingStringList);
         }
         buttonPane.remove(openButton);
         remove(buttonPane);
@@ -529,12 +544,12 @@ public class WardrobeManagerProgram extends JFrame {
             listModel.addElement(o.outfitToString());
             outfits.add(o);
         }
-        JScrollPane listScroller = new JScrollPane();
+        listScroller = new JScrollPane();
         outfitStringList = new JList<>(listModel);
         outfitStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         outfitStringList.setFont(new Font("System", Font.PLAIN, 24));
-        listScroller.setViewportView(clothingStringList);
-        clothingStringList.setLayoutOrientation(JList.VERTICAL);
+        listScroller.setViewportView(outfitStringList);
+        outfitStringList.setLayoutOrientation(JList.VERTICAL);
         add(listScroller);
         addButtonOutfit();
         isOutfitsDisplayed = true;
@@ -660,7 +675,7 @@ public class WardrobeManagerProgram extends JFrame {
     // and displays error message
     private Clothing collectItem(String type) {
         int response = JOptionPane.showConfirmDialog(null, "Do you want to add a " + type
-                        + "to the outfit?", "Add " + type, JOptionPane.YES_NO_OPTION,
+                        + " to the outfit?", "Add " + type, JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             String name = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
@@ -694,9 +709,10 @@ public class WardrobeManagerProgram extends JFrame {
                 "What is the name of the item you want to remove?", null);
         name = name.toLowerCase();
         if (myWardrobe.removeClothing(name)) {
-            System.out.println(name + " was successfully removed from your wardrobe, and is now in your old wardrobe");
+            informationMessage(name
+                    + " was successfully removed from your wardrobe, and is now in your old wardrobe", "Removed");
         } else {
-            System.out.println("There was no item of name " + name + " in your wardrobe");
+            errorMessage("There was no item of name " + name + " in your wardrobe");
         }
         updateClothingList();
     }

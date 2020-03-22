@@ -35,6 +35,14 @@ public class ClothingTest {
         assertEquals("me",h.getBrand());
         assertEquals("cotton",sweater.getFabric());
         assertEquals("",shirt.getCollaboration());
+        assertEquals("bottoms",b.getType());
+        assertEquals("hat",h.getType());
+        assertEquals("shirt",shirt.getType());
+        assertEquals("shoe",shoe.getType());
+        assertEquals("sock",sock.getType());
+        assertEquals("jacket",j.getType());
+        assertEquals("sweater",sweater.getType());
+
     }
 
     @Test
@@ -67,6 +75,7 @@ public class ClothingTest {
         assertEquals("mid",sock.getHeight());
         sock.setHeight("low");
         assertEquals("low",sock.getHeight());
+
     }
 
 }

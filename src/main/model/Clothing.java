@@ -85,10 +85,6 @@ public abstract class Clothing implements Serializable {
     public void setFabric(String fabric) {
         this.fabric = fabric;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }
 
 

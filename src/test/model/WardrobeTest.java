@@ -65,7 +65,19 @@ class WardrobeTest {
     public void testAddDuplicateItem() {
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        assertEquals(1, testWardrobe.currentSize());
+        testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+        testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+        testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
+        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
+        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+        assertEquals(7, testWardrobe.currentSize());
     }
 
     @Test
@@ -103,6 +115,12 @@ class WardrobeTest {
         testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
         assertEquals(2, testWardrobe.outfitSize());
 
+    }
+
+    @Test
+    void testFindOutfitNotThere() {
+        testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+        assertNull(testWardrobe.findOutfit("na"));
     }
 
     @Test

@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InWardrobeException;
 import model.clothingtypes.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,51 +39,91 @@ class WardrobeTest {
     //Make methods are tested implicitly throughout tests
     @Test
     public void testAddSingleItem() {
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        try {
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+        } catch (InWardrobeException e) {
+            fail("should not have thrown");
+        }
         assertEquals(1, testWardrobe.currentSize());
     }
 
     @Test
     public void testAddMultipleItems() {
-        Clothing c = testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        Clothing c2 = testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
-        Clothing c3 = testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
-        Clothing c4 = testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        Clothing c5 = testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
-        Clothing c6 = testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        Clothing c7 = testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
-        assertEquals(7, testWardrobe.currentSize());
-        assertEquals("Bape Busy Works",c.getName());
-        assertEquals("Kappa X Charms Flames",c2.getName());
-        assertEquals("Toro Bravo",c3.getName());
-        assertEquals("OVO Basic Owl",c4.getName());
-        assertEquals("Stormtrooper",c5.getName());
-        assertEquals("Bomber",c6.getName());
-        assertEquals("Distressed Jeans",c7.getName());
+        try {
+            Clothing c = testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            Clothing c2 = testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Kappa", "Cotton");
+            Clothing c3 = testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
+            Clothing c4 = testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            Clothing c5 = testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+            Clothing c6 = testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            Clothing c7 = testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+            assertEquals(7, testWardrobe.currentSize());
+            assertEquals("Bape Busy Works", c.getName());
+            assertEquals("Kappa X Charms Flames", c2.getName());
+            assertEquals("Toro Bravo", c3.getName());
+            assertEquals("OVO Basic Owl", c4.getName());
+            assertEquals("Stormtrooper", c5.getName());
+            assertEquals("Bomber", c6.getName());
+            assertEquals("Distressed Jeans", c7.getName());
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testAddDuplicateItem() {
-        testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
-        testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
-        testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
-        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
-        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+        try {
+            testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
+            testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
+            fail("should have thrown");
+        } catch (Exception e) {
+        }
+        try {
+            testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+            testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+            fail("should have thrown");
+        } catch (InWardrobeException ex) {
+        }
+        try {
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            fail("should have thrown");
+        } catch (Exception e) {
+        }
+        try {
+            testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+            testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+            fail("should have thrown");
+        } catch (Exception e) {
+        }
+        try {
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            fail("should have thrown");
+        } catch (Exception e) {
+        }
+        try {
+            testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
+            testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
+            fail("should have thrown");
+        } catch (Exception e) {
+        }
+        try {
+            testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
         assertEquals(7, testWardrobe.currentSize());
     }
 
     @Test
     public void testRemoveThere() {
-        testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+        try {
+            testWardrobe.makeSock("Mortal Kombat", Clothing.LARGE, "Yellow", "Stance", "Cotton", "Tall");
+        } catch (InWardrobeException e) {
+            fail("should not have thrown");
+        }
         testWardrobe.removeClothing("mortal kombat");
         assertEquals(1, testWardrobe.oldSize());
 
@@ -90,11 +131,15 @@ class WardrobeTest {
 
     @Test
     public void testRemoveMultipleThere() {
-        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
-        testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
-        testWardrobe.removeClothing("stormtrooper");
-        testWardrobe.removeClothing("distressed jeans");
-        assertEquals(2, testWardrobe.oldSize());
+        try {
+            testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+            testWardrobe.makeBottoms("Distressed Jeans", Clothing.LARGE, "Blue", "Le 31", "Denim", "Full");
+            testWardrobe.removeClothing("stormtrooper");
+            testWardrobe.removeClothing("distressed jeans");
+            assertEquals(2, testWardrobe.oldSize());
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
 
     }
 
@@ -125,78 +170,108 @@ class WardrobeTest {
 
     @Test
     public void testFilterBrand() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
-        testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
-        assertEquals("\nshirt named Bape Busy Works made by Bape" +
-                "\nsweater named Kappa X Charms Flames made by Bape", testWardrobe.filterBrandWardrobe("bape"));
+        try {
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            testWardrobe.makeSweater("Kappa X Charms Flames", Clothing.MEDIUM, "Red", "Bape", "Cotton");
+            testWardrobe.makeShoe("Toro Bravo", Clothing.EXTRA_LARGE, "Red", "Air Jordan", "Nubuck", "Jordan 4");
+            assertEquals("\nshirt named Bape Busy Works made by Bape" +
+                    "\nsweater named Kappa X Charms Flames made by Bape", testWardrobe.filterBrandWardrobe("bape"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testFilterColor() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
-        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
-                "shoe named Defiant made by Air Jordan\n" +
-                "sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("white"));
+        try {
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+            testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                    "shoe named Defiant made by Air Jordan\n" +
+                    "sock named Stormtrooper made by Stance", testWardrobe.filterColorWardrobe("white"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testFilterType() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
-        testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
-        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "Cotton", "Short");
-        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
-                "shirt named Supreme Octopus made by Bape", testWardrobe.filterTypeWardrobe("shirt"));
+        try {
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
+            testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "Cotton", "Tall");
+            testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "Cotton", "Short");
+            assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                    "shirt named Supreme Octopus made by Bape", testWardrobe.filterTypeWardrobe("shirt"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testFilterFabric() {
-        testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "cotton", "Short");
-        testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
-        testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
-        testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "cotton", "Tall");
-        testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
-        testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "cotton", "Short");
-        assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
-                "sock named Stormtrooper made by Stance\n" +
-                "shirt named Supreme Octopus made by Bape", testWardrobe.filterFabricWardrobe("cotton"));
-    }
+        try {
+            testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "cotton", "Short");
+            testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
+            testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
+            testWardrobe.makeSock("Stormtrooper", Clothing.LARGE, "White", "Stance", "cotton", "Tall");
+            testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            testWardrobe.makeShirt("Supreme Octopus", Clothing.LARGE, "Red", "Bape", "cotton", "Short");
+            assertEquals("\nshirt named Bape Busy Works made by Bape\n" +
+                    "sock named Stormtrooper made by Stance\n" +
+                    "shirt named Supreme Octopus made by Bape", testWardrobe.filterFabricWardrobe("cotton"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
+
+}
 
     @Test
     public void testFindCurrentThere(){
+        try {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
         assertEquals("Bape Busy Works", testWardrobe.findCurrentItem("bape busy works").name);
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testFindCurrentNotThere(){
+        try {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
         assertNull(testWardrobe.findCurrentItem("Toro Bravo"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testCurrentToString() {
+        try {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
         assertEquals("\nhat named OVO Basic Owl made by OVO\n" +
                 "shirt named Bape Busy Works made by Bape\n" +
                 "shoe named Defiant made by Air Jordan", testWardrobe.currentToString());
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
     public void testOldToString() {
+        try {
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
         testWardrobe.makeShirt("Bape Busy Works", Clothing.MEDIUM, "White", "Bape", "Cotton", "Short");
         testWardrobe.makeShoe("Defiant", Clothing.EXTRA_LARGE, "White", "Air Jordan", "Leather", "Jordan 1");
@@ -206,6 +281,9 @@ class WardrobeTest {
         assertEquals("\nhat named OVO Basic Owl made by OVO\n" +
                 "shirt named Bape Busy Works made by Bape\n" +
                 "shoe named Defiant made by Air Jordan", testWardrobe.oldToString());
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
@@ -218,6 +296,7 @@ class WardrobeTest {
 
     @Test
     void testGetLists() {
+        try {
         testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
         assertTrue(testWardrobe.getOutfits().contains(testWardrobe.findOutfit("tester")));
         testWardrobe.makeHat("OVO Basic Owl", Clothing.SMALL, "Black", "OVO", "polyester");
@@ -225,6 +304,9 @@ class WardrobeTest {
         assertTrue(testWardrobe.getCurrentWardrobe().contains(testWardrobe.findCurrentItem("ovo basic owl")));
         testWardrobe.removeClothing("Bape Busy Works");
         assertTrue(testWardrobe.getOldWardrobe().contains(testWardrobe.findOldItem("bape busy works")));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
 }

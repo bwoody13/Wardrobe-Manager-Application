@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InWardrobeException;
 import model.clothingtypes.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ public class Wardrobe implements Serializable {
     private ArrayList<Clothing> oldWardrobe;  //clothes previously owned, but sold or threw away
     private ArrayList<Outfit> outfits; //list of outfits made
 
-    //REQUIRES:
     //MODIFIES:
     //EFFECTS: creates a new and empty wardrobe
     public Wardrobe() {
@@ -23,48 +23,47 @@ public class Wardrobe implements Serializable {
         outfits = new ArrayList<>();
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeBottoms(String name, String size, String color, String brand, String fabric, String length) {
+    public Clothing makeBottoms(String name, String size, String color, String brand,
+                                String fabric, String length) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Bottoms newBottoms = new Bottoms(name, size, color, brand, fabric, length);
             currentWardrobe.add(newBottoms);
             return newBottoms;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeHat(String name, String size, String color, String brand, String fabric) {
+    public Clothing makeHat(String name, String size, String color, String brand,
+                            String fabric) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Hat newHat = new Hat(name, size, color, brand, fabric);
             currentWardrobe.add(newHat);
             return newHat;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
 
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeJacket(String name, String size, String color, String brand, String fabric) {
+    public Clothing makeJacket(String name, String size, String color, String brand,
+                               String fabric) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Jacket newJacket = new Jacket(name, size, color, brand, fabric);
             currentWardrobe.add(newJacket);
             return newJacket;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
 
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
     public Clothing makeShirt(String name,
@@ -72,57 +71,57 @@ public class Wardrobe implements Serializable {
                               String color,
                               String brand,
                               String fabric,
-                              String sleeveLength) {
+                              String sleeveLength) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Shirt newShirt = new Shirt(name, size, color, brand, fabric, sleeveLength);
             currentWardrobe.add(newShirt);
             return newShirt;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
 
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeShoe(String name, String size, String color, String brand, String fabric, String model) {
+    public Clothing makeShoe(String name, String size, String color, String brand,
+                             String fabric, String model) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Shoe newShoe = new Shoe(name, size, color, brand, fabric, model);
             currentWardrobe.add(newShoe);
             return newShoe;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeSock(String name, String size, String color, String brand, String fabric, String height) {
+    public Clothing makeSock(String name, String size, String color, String brand,
+                             String fabric, String height) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Sock newSock = new Sock(name, size, color, brand, fabric, height);
             currentWardrobe.add(newSock);
             return newSock;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
         }
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
-    public Clothing makeSweater(String name, String size, String color, String brand, String fabric) {
+    public Clothing makeSweater(String name, String size, String color,
+                                String brand, String fabric) throws InWardrobeException {
         if (findCurrentItem(name) == null) {
             Sweater newSweater = new Sweater(name, size, color, brand, fabric);
             currentWardrobe.add(newSweater);
             return newSweater;
         } else {
-            return findCurrentItem(name);
+            throw new InWardrobeException();
         }
     }
 
-    //REQUIRES:
+
     //MODIFIES: this
     //EFFECTS: removes clothing item if it is in the current wardrobe, and adds it to the old wardrobe, returning true
     // otherwise returns false
@@ -153,7 +152,7 @@ public class Wardrobe implements Serializable {
         return newOutfit;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: returns clothes meeting brand criteria
     public String filterBrandWardrobe(String brand) {
@@ -171,7 +170,7 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: returns clothes meeting colour criteria
     public String filterColorWardrobe(String color) {
@@ -189,7 +188,7 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: returns clothes meeting clothing type criteria
     public String filterTypeWardrobe(String type) {
@@ -207,7 +206,7 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: returns clothes meeting fabric criteria
     public String filterFabricWardrobe(String fabric) {
@@ -225,28 +224,28 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: shows size of current wardrobe
     public int currentSize() {
         return currentWardrobe.size();
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: shows size of old wardrobe
     public int oldSize() {
         return oldWardrobe.size();
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: show size of outfits saved
     public int outfitSize() {
         return outfits.size();
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: produces the clothing item with given name in current wardrobe, or if not found, null
     public Clothing findCurrentItem(String name) {
@@ -261,7 +260,7 @@ public class Wardrobe implements Serializable {
         return found;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: produces the clothing item in old wardrobe with given name, or if not found, null
     public Clothing findOldItem(String name) {
@@ -275,7 +274,7 @@ public class Wardrobe implements Serializable {
         return found;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: produces the outfit with given name, or if not found, null
     public Outfit findOutfit(String name) {
@@ -289,7 +288,7 @@ public class Wardrobe implements Serializable {
         return found;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: creates a string of items in the current wardrobe
     public String currentToString() {
@@ -300,7 +299,7 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: creates a string of items in the old wardrobe
     public String oldToString() {
@@ -311,7 +310,7 @@ public class Wardrobe implements Serializable {
         return output;
     }
 
-    //REQUIRES:
+
     //MODIFIES:
     //EFFECTS: creates a string of outfits in the wardrobe
     public String outfitsToString() {

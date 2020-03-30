@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InWardrobeException;
 import model.Clothing;
 import model.Outfit;
 import model.Wardrobe;
@@ -776,9 +777,13 @@ public class WardrobeManagerProgram extends JFrame {
         String fabric = collectFabric();
         String length = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the length?", null);
-        myWardrobe.makeBottoms(name,size,color,brand,fabric,length);
-        updateClothingList();
-        playSound(BOTTOMS_AUDIO_FILE);
+        try {
+            myWardrobe.makeBottoms(name,size,color,brand,fabric,length);
+            updateClothingList();
+            playSound(BOTTOMS_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -791,9 +796,13 @@ public class WardrobeManagerProgram extends JFrame {
         String color = collectColor();
         String brand = collectBrand();
         String fabric = collectFabric();
-        myWardrobe.makeHat(name,size,color,brand,fabric);
-        updateClothingList();
-        playSound(HAT_AUDIO_FILE);
+        try {
+            myWardrobe.makeHat(name,size,color,brand,fabric);
+            updateClothingList();
+            playSound(HAT_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -806,9 +815,13 @@ public class WardrobeManagerProgram extends JFrame {
         String color = collectColor();
         String brand = collectBrand();
         String fabric = collectFabric();
-        myWardrobe.makeJacket(name,size,color,brand,fabric);
-        updateClothingList();
-        playSound(JACKET_AUDIO_FILE);
+        try {
+            myWardrobe.makeJacket(name,size,color,brand,fabric);
+            updateClothingList();
+            playSound(JACKET_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -823,9 +836,13 @@ public class WardrobeManagerProgram extends JFrame {
         String fabric = collectFabric();
         String sleeveLength = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the sleeve length?", null);
-        myWardrobe.makeShirt(name,size,color,brand,fabric,sleeveLength);
-        updateClothingList();
-        playSound(SHIRT_AUDIO_FILE);
+        try {
+            myWardrobe.makeShirt(name,size,color,brand,fabric,sleeveLength);
+            updateClothingList();
+            playSound(SHIRT_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -840,9 +857,13 @@ public class WardrobeManagerProgram extends JFrame {
         String fabric = collectFabric();
         String model = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the model?", null);
-        myWardrobe.makeShoe(name,size,color,brand,fabric,model);
-        updateClothingList();
-        playSound(SHOE_AUDIO_FILE);
+        try {
+            myWardrobe.makeShoe(name,size,color,brand,fabric,model);
+            updateClothingList();
+            playSound(SHOE_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -857,9 +878,13 @@ public class WardrobeManagerProgram extends JFrame {
         String fabric = collectFabric();
         String height = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the height?", null);
-        myWardrobe.makeSock(name,size,color,brand,fabric,height);
-        updateClothingList();
-        playSound(SOCK_AUDIO_FILE);
+        try {
+            myWardrobe.makeSock(name,size,color,brand,fabric,height);
+            updateClothingList();
+            playSound(SOCK_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
@@ -872,9 +897,13 @@ public class WardrobeManagerProgram extends JFrame {
         String color = collectColor();
         String brand = collectBrand();
         String fabric = collectFabric();
-        myWardrobe.makeSweater(name,size,color,brand,fabric);
-        updateClothingList();
-        playSound(SWEATER_AUDIO_FILE);
+        try {
+            myWardrobe.makeSweater(name,size,color,brand,fabric);
+            updateClothingList();
+            playSound(SWEATER_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Item of " + name + " already in wardrobe");
+        }
         name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }

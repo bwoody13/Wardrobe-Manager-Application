@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,15 +106,7 @@ public class WardrobeManagerProgram extends JFrame {
             listModel.addElement(c.getType().toUpperCase() + " - Name: " + c.getName() + ", Made by: " + c.getBrand());
             clothingList.add(c);
         }
-        listScroller = new JScrollPane();
-        clothingStringList = new JList<>(listModel);
-        clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
-        listScroller.setViewportView(clothingStringList);
-        clothingStringList.setLayoutOrientation(JList.VERTICAL);
-        add(listScroller);
-        addButtonClothing();
-        setVisible(true);
+        configureList(listModel);
     }
 
     //https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
@@ -452,15 +445,7 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
-        listScroller = new JScrollPane();
-        clothingStringList = new JList<>(listModel);
-        clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
-        listScroller.setViewportView(clothingStringList);
-        clothingStringList.setLayoutOrientation(JList.VERTICAL);
-        add(listScroller);
-        addButtonClothing();
-        setVisible(true);
+        configureList(listModel);
     }
 
     //MODIFIES: this
@@ -479,15 +464,7 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
-        listScroller = new JScrollPane();
-        clothingStringList = new JList<>(listModel);
-        clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        clothingStringList.setFont(new Font("System", Font.PLAIN, 24));
-        listScroller.setViewportView(clothingStringList);
-        clothingStringList.setLayoutOrientation(JList.VERTICAL);
-        add(listScroller);
-        addButtonClothing();
-        setVisible(true);
+        configureList(listModel);
     }
 
     //MODIFIES: this
@@ -506,6 +483,10 @@ public class WardrobeManagerProgram extends JFrame {
                 clothingList.add(c);
             }
         }
+        configureList(listModel);
+    }
+
+    private void configureList(ListModel listModel) {
         listScroller = new JScrollPane();
         clothingStringList = new JList<>(listModel);
         clothingStringList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -665,8 +646,12 @@ public class WardrobeManagerProgram extends JFrame {
         Clothing bottoms = collectItem("bottoms");
         Clothing sock = collectItem("sock");
         Clothing shoe = collectItem("shoe");
-        myWardrobe.makeOutfit(name, hat,shirt,sweater,jacket,bottoms,sock,shoe);
-        playSound(OUTFIT_AUDIO_FILE);
+        try {
+            myWardrobe.makeOutfit(name, hat,shirt,sweater,jacket,bottoms,sock,shoe);
+            playSound(OUTFIT_AUDIO_FILE);
+        } catch (InWardrobeException e) {
+            errorMessage("Outfit of that name already in wardrobe");
+        }
         name = name.toLowerCase();
         displayOutfit(myWardrobe.findOutfit(name));
     }
@@ -771,10 +756,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a bottom to the wardrobe and refreshes main page with updated wardrobe
     private void addBottoms() {
         String name = collectName("bottoms");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         String length = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the length?", null);
         try {
@@ -784,7 +769,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -792,10 +776,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a hat to the wardrobe and refreshes main page with updated wardrobe
     private void addHat() {
         String name = collectName("hat");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         try {
             myWardrobe.makeHat(name,size,color,brand,fabric);
             updateClothingList();
@@ -803,7 +787,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -811,10 +794,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a jacket to the wardrobe and refreshes main page with updated wardrobe
     private void addJacket() {
         String name = collectName("jacket");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         try {
             myWardrobe.makeJacket(name,size,color,brand,fabric);
             updateClothingList();
@@ -822,7 +805,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -830,10 +812,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a shirt to the wardrobe and refreshes main page with updated wardrobe
     private void addShirt() {
         String name = collectName("shirt");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         String sleeveLength = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the sleeve length?", null);
         try {
@@ -843,7 +825,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -851,10 +832,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a shoe to the wardrobe and refreshes main page with updated wardrobe
     private void addShoe() {
         String name = collectName("shoe");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         String model = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the model?", null);
         try {
@@ -864,7 +845,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -872,10 +852,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a sock to the wardrobe and refreshes main page with updated wardrobe
     private void addSock() {
         String name = collectName("sock");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         String height = JOptionPane.showInputDialog(WardrobeManagerProgram.this,
                 "What is the height?", null);
         try {
@@ -885,7 +865,6 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
     }
 
@@ -893,10 +872,10 @@ public class WardrobeManagerProgram extends JFrame {
     //EFFECTS: adds a sweater to the wardrobe and refreshes main page with updated wardrobe
     private void addSweater() {
         String name = collectName("sweater");
-        String size = collectSize();
-        String color = collectColor();
-        String brand = collectBrand();
-        String fabric = collectFabric();
+        String size = collect("size");
+        String color = collect("color");
+        String brand = collect("brand");
+        String fabric = collect("fabric");
         try {
             myWardrobe.makeSweater(name,size,color,brand,fabric);
             updateClothingList();
@@ -904,8 +883,13 @@ public class WardrobeManagerProgram extends JFrame {
         } catch (InWardrobeException e) {
             errorMessage("Item of " + name + " already in wardrobe");
         }
-        name = name.toLowerCase();
         displayItem(myWardrobe.findCurrentItem(name));
+    }
+
+    //EFFECTS: returns the string for the attribute given
+    private String collect(String attribute) {
+        return JOptionPane.showInputDialog(WardrobeManagerProgram.this,
+                "What is the " + attribute + "?", null);
     }
 
     //EFFECTS: returns the name for a new clothing item
@@ -914,29 +898,6 @@ public class WardrobeManagerProgram extends JFrame {
                 "What is the name of this " + type + "?", null);
     }
 
-    //EFFECTS: returns the size for a new clothing item
-    private String collectSize() {
-        return JOptionPane.showInputDialog(WardrobeManagerProgram.this,
-                "What is the size?", null);
-    }
-
-    //EFFECTS: returns the color for a new clothing item
-    private String collectColor() {
-        return JOptionPane.showInputDialog(WardrobeManagerProgram.this,
-                "What is the color?", null);
-    }
-
-    //EFFECTS: returns the brand for a new clothing item
-    private String collectBrand() {
-        return JOptionPane.showInputDialog(WardrobeManagerProgram.this,
-                "What is the brand?", null);
-    }
-
-    //EFFECTS: returns the size for a new clothing item
-    private String collectFabric() {
-        return JOptionPane.showInputDialog(WardrobeManagerProgram.this,
-                "What is the fabric?", null);
-    }
 
     //https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
     //MODIFIES: this

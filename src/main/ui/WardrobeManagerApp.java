@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InWardrobeException;
 import model.Clothing;
 import model.Outfit;
 import model.Wardrobe;
@@ -162,28 +163,43 @@ public class WardrobeManagerApp {
     //MODIFIES: this
     //EFFECTS: makes the actual clothing item
     private Clothing makeClothing(String slctn, String name, String size, String color, String brand, String fabric) {
-        if (slctn.equals("bottoms")) {
-            System.out.println("Length: ");
-            String length = input.next().toLowerCase();
-            return myWardrobe.makeBottoms(name, size, color, brand, fabric, length);
-        } else if (slctn.equals("hat")) {
-            return myWardrobe.makeHat(name, size, color, brand, fabric);
-        } else if (slctn.equals("jacket")) {
-            return myWardrobe.makeJacket(name, size, color, brand, fabric);
-        } else if (slctn.equals("shirt")) {
-            System.out.println("Sleeve Length: ");
-            String sleeveLength = input.next().toLowerCase();
-            return myWardrobe.makeShirt(name, size, color, brand, fabric, sleeveLength);
-        } else if (slctn.equals("shoe")) {
-            System.out.println("Model: ");
-            String model = input.next().toLowerCase();
-            return myWardrobe.makeShoe(name, size, color, brand, fabric, model);
-        } else if (slctn.equals("sock")) {
-            System.out.println("Height: ");
-            String height = input.next().toLowerCase();
-            return myWardrobe.makeSock(name, size, color, brand, fabric, height);
-        } else {
-            return myWardrobe.makeSweater(name, size, color, brand, fabric);
+        try {
+            if (slctn.equals("bottoms")) {
+                System.out.println("Length: ");
+                String length = input.next().toLowerCase();
+                return myWardrobe.makeBottoms(name, size, color, brand, fabric, length);
+            } else if (slctn.equals("hat")) {
+                return myWardrobe.makeHat(name, size, color, brand, fabric);
+            } else if (slctn.equals("jacket")) {
+                return myWardrobe.makeJacket(name, size, color, brand, fabric);
+            } else if (slctn.equals("shirt")) {
+                System.out.println("Sleeve Length: ");
+                String sleeveLength = input.next().toLowerCase();
+                return myWardrobe.makeShirt(name, size, color, brand, fabric, sleeveLength);
+            } else {
+                return makeClothingContinued(slctn, name, size, color, brand, fabric);
+            }
+        } catch (InWardrobeException e) {
+            return myWardrobe.findCurrentItem(name);
+        }
+    }
+
+    private Clothing makeClothingContinued(String slctn, String name, String size, String color,
+                                           String brand, String fabric) {
+        try {
+            if (slctn.equals("shoe")) {
+                System.out.println("Model: ");
+                String model = input.next().toLowerCase();
+                return myWardrobe.makeShoe(name, size, color, brand, fabric, model);
+            } else if (slctn.equals("sock")) {
+                System.out.println("Height: ");
+                String height = input.next().toLowerCase();
+                return myWardrobe.makeSock(name, size, color, brand, fabric, height);
+            } else {
+                return myWardrobe.makeSweater(name, size, color, brand, fabric);
+            }
+        } catch (InWardrobeException e) {
+            return myWardrobe.findCurrentItem(name);
         }
     }
 
@@ -283,8 +299,13 @@ public class WardrobeManagerApp {
         name = name.toLowerCase();
 
         Outfit outfit;
-        outfit = myWardrobe.makeOutfit(name, hatO, shirtO, sweaterO, jacketO, bottomsO, socksO, shoeO);
-        System.out.println("You have successfully added outfit " + outfit.getName() + " to your wardrobe");
+        try {
+            outfit = myWardrobe.makeOutfit(name, hatO, shirtO, sweaterO, jacketO, bottomsO, socksO, shoeO);
+            System.out.println("You have successfully added outfit " + outfit.getName() + " to your wardrobe");
+        } catch (InWardrobeException e) {
+            System.out.println("Outfit of that name already in wardrobe");
+            outfit = myWardrobe.findOutfit(name);
+        }
         System.out.println(outfit.outfitToString());
     }
 

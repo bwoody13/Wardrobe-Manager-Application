@@ -30,15 +30,19 @@ public class WriterReaderTest {
     void runBefore() throws IOException {
         testWriter = new Writer(new FileOutputStream(TEST_FILE));
         testWardrobe = new Wardrobe();
-        testWardrobe.makeShirt("bape_busy_works", "m", "white", "bape", "cotton", "short");
-        testWardrobe.makeShoe("defiant", "xl", "white", "air_jordan", "leather", "jordan_1");
-        testWardrobe.makeHat("ovo_owl", "s", "black", "ovo", "polyester");
-        testWardrobe.makeSock("stormtrooper", "l", "white", "stance", "cotton", "tall");
-        testWardrobe.makeJacket("bomber", "l'", "brown", "alpha_industries", "corduroy");
-        testWardrobe.makeShirt("supreme_octopus", "l", "red", "bape", "cotton", "short");
-        testWardrobe.removeClothing("bomber");
-        testWardrobe.removeClothing("supreme_octopus");
-        testWardrobe.makeOutfit("test_outfit", ovoOwl, busyWorks, kappaCharms,null, blueJean, stormtrooper, defiant);
+        try {
+            testWardrobe.makeShirt("bape_busy_works", "m", "white", "bape", "cotton", "short");
+            testWardrobe.makeShoe("defiant", "xl", "white", "air_jordan", "leather", "jordan_1");
+            testWardrobe.makeHat("ovo_owl", "s", "black", "ovo", "polyester");
+            testWardrobe.makeSock("stormtrooper", "l", "white", "stance", "cotton", "tall");
+            testWardrobe.makeJacket("bomber", "l'", "brown", "alpha_industries", "corduroy");
+            testWardrobe.makeShirt("supreme_octopus", "l", "red", "bape", "cotton", "short");
+            testWardrobe.removeClothing("bomber");
+            testWardrobe.removeClothing("supreme_octopus");
+            testWardrobe.makeOutfit("test_outfit", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test

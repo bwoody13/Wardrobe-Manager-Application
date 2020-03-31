@@ -54,5 +54,20 @@ Run WardrobeManagerProgram to open the Application
    menu. They are pretty explicit in terms of operation. Eg. the "Edit Clothing" button will look up a clothing item 
    then allow you to edit an attribute of your choosing. You may also wish to filter the wardrobe to only display
    certain clothing items. To do this, navigate to the Filter By Submenu under the Wardrobe Menu, then select the style
-   in which you wish to filter. Enjoy using thi application! :) 
+   in which you wish to filter. Enjoy using this application! :) 
+
+#Coupling and Cohesion Analysis:
+**Cohesion** among classes seems good. Clothing class doesn't do much besides create the object, Outfit contains clothing, 
+Wardrobe has a list of clothing and outfits, but methods pertain to adding to lists and dealing with specific wardrobe 
+tasks. GUI uses the wardrobe to modify and display it.
+
+**Coupling** within and between classes, is a bit poor. There is duplication among methods within my GUI and in Wardrobe.
+- In Wardrobe: the makeBottoms/Shirt etc. methods are all almost the exact same. I pulled out the parts that act the same
+  and put it into the makeItem method, which is called by one of the makeBottoms/Shirt etc. methods with correct type 
+  and fields.
+- In WardrobeManagerProgram: the filtering methods all have the same lines ran towards the end of the method. I pulled
+  out all those method calls and was able to refine my code.
+- In WardrobeManagerProgram: the collect methods, are all the same except what is collected, so I changed the attribute 
+  being collected to a parameter that is used within the method, allowing me to be more cohesive and remove additional 
+  duplicate methods.
 

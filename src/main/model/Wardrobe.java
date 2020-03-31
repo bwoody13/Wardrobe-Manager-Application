@@ -24,103 +24,88 @@ public class Wardrobe implements Serializable {
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeBottoms(String name, String size, String color, String brand,
                                 String fabric, String length) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Bottoms newBottoms = new Bottoms(name, size, color, brand, fabric, length);
-            currentWardrobe.add(newBottoms);
-            return newBottoms;
-        } else {
-            throw new InWardrobeException();
-        }
+        return makeItem("bottoms", name,size,color,brand,fabric,length);
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeHat(String name, String size, String color, String brand,
                             String fabric) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Hat newHat = new Hat(name, size, color, brand, fabric);
-            currentWardrobe.add(newHat);
-            return newHat;
-        } else {
-            throw new InWardrobeException();
-
-        }
+        return makeItem("hat", name,size,color,brand,fabric,"");
     }
 
+
+
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeJacket(String name, String size, String color, String brand,
                                String fabric) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Jacket newJacket = new Jacket(name, size, color, brand, fabric);
-            currentWardrobe.add(newJacket);
-            return newJacket;
-        } else {
-            throw new InWardrobeException();
-
-        }
+        return makeItem("jacket", name,size,color,brand,fabric,"");
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeShirt(String name,
                               String size,
                               String color,
                               String brand,
                               String fabric,
                               String sleeveLength) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Shirt newShirt = new Shirt(name, size, color, brand, fabric, sleeveLength);
-            currentWardrobe.add(newShirt);
-            return newShirt;
-        } else {
-            throw new InWardrobeException();
-
-        }
+        return makeItem("shirt", name,size,color,brand,fabric,sleeveLength);
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeShoe(String name, String size, String color, String brand,
                              String fabric, String model) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Shoe newShoe = new Shoe(name, size, color, brand, fabric, model);
-            currentWardrobe.add(newShoe);
-            return newShoe;
-        } else {
-            throw new InWardrobeException();
-        }
+        return makeItem("shoe", name,size,color,brand,fabric,model);
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeSock(String name, String size, String color, String brand,
                              String fabric, String height) throws InWardrobeException {
-        if (findCurrentItem(name) == null) {
-            Sock newSock = new Sock(name, size, color, brand, fabric, height);
-            currentWardrobe.add(newSock);
-            return newSock;
-        } else {
-            throw new InWardrobeException();
-        }
+        return makeItem("sock", name,size,color,brand,fabric,height);
     }
 
     //MODIFIES: this
-    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, return item trying to add
+    //EFFECTS: returns and adds given clothing item to wardrobe, if already in wardrobe, throws exception
     public Clothing makeSweater(String name, String size, String color,
                                 String brand, String fabric) throws InWardrobeException {
+        return makeItem("sweater", name,size,color,brand,fabric,"");
+    }
+
+    //MODIFIES: this
+    //EFFECTS: will complete the making of a clothing item based on type
+    public Clothing makeItem(String type, String name, String size, String color, String brand,
+                             String fabric, String customAtt) throws InWardrobeException {
+        type = type.toLowerCase();
+        Clothing newItem;
+        if (type.equals("bottoms")) {
+            newItem = new Bottoms(name, size, color, brand, fabric, customAtt);
+        } else if (type.equals("hat")) {
+            newItem = new Hat(name, size, color, brand, fabric);
+        } else if (type.equals("jacket")) {
+            newItem = new Jacket(name, size, color, brand, fabric);
+        } else if (type.equals("shirt")) {
+            newItem = new Shirt(name, size, color, brand, fabric, customAtt);
+        } else if (type.equals("shoe")) {
+            newItem = new Shoe(name, size, color, brand, fabric, customAtt);
+        } else if (type.equals("sock")) {
+            newItem = new Sock(name, size, color, brand, fabric, customAtt);
+        } else {
+            newItem = new Sweater(name, size, color, brand, fabric);
+        }
         if (findCurrentItem(name) == null) {
-            Sweater newSweater = new Sweater(name, size, color, brand, fabric);
-            currentWardrobe.add(newSweater);
-            return newSweater;
+            currentWardrobe.add(newItem);
+            return newItem;
         } else {
             throw new InWardrobeException();
         }
     }
-
 
     //MODIFIES: this
     //EFFECTS: removes clothing item if it is in the current wardrobe, and adds it to the old wardrobe, returning true
@@ -146,12 +131,15 @@ public class Wardrobe implements Serializable {
                              Clothing jacket,
                              Clothing bottoms,
                              Clothing socks,
-                             Clothing shoes) {
-        Outfit newOutfit = new Outfit(name, hat, shirt, sweater, jacket, bottoms, socks, shoes);
-        outfits.add(newOutfit);
-        return newOutfit;
+                             Clothing shoes) throws InWardrobeException {
+        if (findOutfit(name) == null) {
+            Outfit newOutfit = new Outfit(name, hat, shirt, sweater, jacket, bottoms, socks, shoes);
+            outfits.add(newOutfit);
+            return newOutfit;
+        } else {
+            throw new InWardrobeException();
+        }
     }
-
 
     //MODIFIES:
     //EFFECTS: returns clothes meeting brand criteria

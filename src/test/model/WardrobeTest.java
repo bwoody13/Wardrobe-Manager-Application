@@ -111,8 +111,8 @@ class WardrobeTest {
         try {
             testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
             testWardrobe.makeJacket("Bomber", Clothing.LARGE, "Brown", "Alpha Industries", "Courdoroy");
+            fail("should have thrown");
         } catch (Exception e) {
-            fail("should not have thrown");
         }
         assertEquals(7, testWardrobe.currentSize());
     }
@@ -150,22 +150,34 @@ class WardrobeTest {
 
     @Test
     public void testMakeOutfit() {
-        testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
+        try {
+            testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
+        } catch (InWardrobeException e) {
+            fail("should not have thrown");
+        }
         assertEquals(1, testWardrobe.outfitSize());
     }
 
     @Test
     public void testMakeMultipleOutfits() {
-        testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
-        testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
-        assertEquals(2, testWardrobe.outfitSize());
+        try {
+            testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+            testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
+            assertEquals(2, testWardrobe.outfitSize());
+        } catch (Exception e) {
+            fail("sjould not have thrown");
+        }
 
     }
 
     @Test
     void testFindOutfitNotThere() {
-        testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
-        assertNull(testWardrobe.findOutfit("na"));
+        try {
+            testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+            assertNull(testWardrobe.findOutfit("na"));
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
     }
 
     @Test
@@ -288,10 +300,26 @@ class WardrobeTest {
 
     @Test
     public void testOutfitsToString() {
-        testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
-        testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
-        assertEquals("\nTester(hat: OVO Basic Owl shirt: Bape Busy Works sweater: Kappa X Charms Flames  bottoms: Distressed Jeans sock: Stormtrooper shoe: Defiant)\n" +
-                "Test Outfit( shirt: Supreme Octopus  jacket: Bomber bottoms: Distressed Jeans sock: Mortal Kombat shoe: Toro Bravo)", testWardrobe.outfitsToString());
+        try {
+            testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+            testWardrobe.makeOutfit("Test Outfit", null, octopus, null, bomberAlpha, blueJean, mk, toro);
+            assertEquals("\nTester(hat: OVO Basic Owl shirt: Bape Busy Works sweater: Kappa X Charms Flames  bottoms: Distressed Jeans sock: Stormtrooper shoe: Defiant)\n" +
+                    "Test Outfit( shirt: Supreme Octopus  jacket: Bomber bottoms: Distressed Jeans sock: Mortal Kombat shoe: Toro Bravo)", testWardrobe.outfitsToString());
+        } catch (Exception e) {
+            fail("should not have thrown");
+        }
+    }
+
+    @Test
+    void testDuplicateOutfitName() {
+        try{
+            testWardrobe.makeOutfit("Tester", ovoOwl, busyWorks, kappaCharms, null, blueJean, stormtrooper, defiant);
+            testWardrobe.makeOutfit("Tester", null, octopus, null, bomberAlpha, blueJean, mk, toro);
+            fail("should have thrown exeception");
+        } catch (Exception e) {
+            //good
+        }
+        assertEquals(1,testWardrobe.outfitSize());
     }
 
     @Test

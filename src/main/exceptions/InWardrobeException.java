@@ -6,7 +6,4 @@ public class InWardrobeException extends Exception {
         super();
     }
 
-    public InWardrobeException(String message) {
-        super(message);
-    }
 }

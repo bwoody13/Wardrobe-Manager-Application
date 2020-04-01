@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.*;
-
 //runs the console application
 public class Main {
     private static WardrobeManagerApp run;

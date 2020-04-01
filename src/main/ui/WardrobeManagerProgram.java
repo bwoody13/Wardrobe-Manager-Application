@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,6 @@ public class WardrobeManagerProgram extends JFrame {
 
 
     private Wardrobe myWardrobe;
-    private JMenuBar menuBar;
     private JMenu clothing;
     private JMenu outfit;
     private JMenu wardrobe;
@@ -135,7 +133,7 @@ public class WardrobeManagerProgram extends JFrame {
     //MODIFIES: this
     //EFFECTS: creates the menu bar with items
     public void createMenus() {
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         clothing = new JMenu("Clothing");
         outfit = new JMenu("Outfit");
         wardrobe = new JMenu("Wardrobe");
